@@ -1,4 +1,4 @@
 import InputBox from "./IinputBox";
 
 
-export default {InputBox};
+export {InputBox};
