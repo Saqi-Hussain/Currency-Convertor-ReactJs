@@ -8,18 +8,19 @@ function App() {
   const [amount, setAmount] = useState(0);
   const [convertedAmount, setConvertedAmount] = useState(0);
   const [from, setFrom] = useState("usd");
-  const [to, setTo] = useState("inr");
+  const [to, setTo] = useState("pkr");
 
   const currencyInfo = UseCurrencyInfo(from);
 
   const options = Object.keys(currencyInfo);
 
-  const swap = () => {
-    setFrom(to)
-    setTo(from)
-    setConvertedAmount(amount)
-    setAmount(convertedAmount)
-  }
+  let swap = () => {
+    let temp = from;
+    setFrom(to);
+    setTo(temp);
+    setConvertedAmount(amount);
+    setAmount(convertedAmount);
+  };
 
   const convert = () => {
     setConvertedAmount(amount * currencyInfo[to]);
@@ -40,19 +41,29 @@ function App() {
           <InputBox
             Amount={amount}
             currencyOptions={options}
-            onCurrencyChange={(currency) => setFrom(currency)}
-            onAmountChange={(amount) => setAmount(amount)}
+            onCurrencyChange={(currency) => {
+              console.log(currency);
+              setFrom(currency);
+            }}
+            onAmountChange={(amount) => {
+              console.log(amount);
+              setAmount(amount);
+            }}
             selectCurrency={from}
           />
           <button
             className=" bg-blue-600 text-3xl w-32 z-10 -mt-4 ml-80 p-5 rounded-xl text-white font-bold shadow-2xl	"
-            onClick={swap}
+            onClick={() => {
+              console.log(amount);
+              console.log(convertedAmount);
+              swap();
+            }}
           >
             Swap
           </button>
           <div className="flex h-20 text-lg font-medium -mt-4 ">
             <InputBox
-              isDisable={isDisable}
+              isDisable
               className="bg-white"
               Amount={convertedAmount}
               selectCurrency={to}

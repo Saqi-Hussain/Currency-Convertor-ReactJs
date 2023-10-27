@@ -30,6 +30,7 @@ function InputBox({
       />
       <select
         className="h-10 w-20 mt-5 ml-3 px-2 font-bold rounded-xl text-xl shadow-2xl	"
+        value={selectCurrency}
         onChange={(e) => onCurrencyChange && onCurrencyChange(e.target.value)}
       >
         {currencyOptions.map((currency) => (
